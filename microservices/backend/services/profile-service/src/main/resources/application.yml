@@ -8,7 +8,7 @@ spring:
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/resume_profile}
     username: ${SPRING_DATASOURCE_USERNAME:postgres}
-    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     open-in-view: false
   flyway:
@@ -38,7 +38,7 @@ app:
   internal:
     api:
       enabled: true
-      token: ${PROFILE_INTERNAL_TOKEN:dev-internal-token}
+      token: ${PROFILE_INTERNAL_TOKEN}
   security:
     session:
       enabled: false
