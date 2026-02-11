@@ -1,6 +1,15 @@
 server:
   port: 8082
   forward-headers-strategy: framework
+  ssl:
+    enabled: ${PROFILE_TLS_ENABLED:true}
+    key-store: ${PROFILE_TLS_KEYSTORE_PATH:}
+    key-store-password: ${PROFILE_TLS_KEYSTORE_PASSWORD:}
+    key-store-type: ${PROFILE_TLS_KEYSTORE_TYPE:PKCS12}
+    trust-store: ${PROFILE_TLS_TRUSTSTORE_PATH:}
+    trust-store-password: ${PROFILE_TLS_TRUSTSTORE_PASSWORD:}
+    trust-store-type: ${PROFILE_TLS_TRUSTSTORE_TYPE:PKCS12}
+    client-auth: ${PROFILE_TLS_CLIENT_AUTH:want}
 
 spring:
   application:
@@ -38,7 +47,10 @@ app:
   internal:
     api:
       enabled: true
-      token: ${PROFILE_INTERNAL_TOKEN}
+      mtls:
+        enabled: ${PROFILE_INTERNAL_MTLS_ENABLED:true}
+        required-subject: ${PROFILE_INTERNAL_MTLS_REQUIRED_SUBJECT:CN=resume-auth-service}
+        required-san-dns: ${PROFILE_INTERNAL_MTLS_REQUIRED_SAN_DNS:}
   security:
     session:
       enabled: false
