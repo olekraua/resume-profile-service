@@ -31,6 +31,20 @@ spring:
           jwk-set-uri: ${AUTH_JWK_SET_URI:http://localhost:8081/oauth2/jwks}
 
 app:
+  platform:
+    middleware:
+      timeout:
+        enabled: ${APP_PLATFORM_TIMEOUT_ENABLED:true}
+      retry:
+        enabled: ${APP_PLATFORM_RETRY_ENABLED:true}
+      circuit:
+        enabled: ${APP_PLATFORM_CIRCUIT_ENABLED:true}
+      idempotency:
+        enabled: ${APP_PLATFORM_IDEMPOTENCY_ENABLED:true}
+      telemetry:
+        enabled: ${APP_PLATFORM_TELEMETRY_ENABLED:true}
+        request-id-header: ${APP_PLATFORM_REQUEST_ID_HEADER:X-Request-Id}
+        trace-id-header: ${APP_PLATFORM_TRACE_ID_HEADER:X-Trace-Id}
   cors:
     allowed-origins:
       - ${APP_CORS_ALLOWED_ORIGINS:https://localhost:4200}
@@ -57,3 +71,13 @@ app:
       enabled: false
     jwt:
       enabled: true
+
+upload:
+  object-storage:
+    enabled: ${UPLOAD_OBJECT_STORAGE_ENABLED:false}
+    endpoint: ${MINIO_ENDPOINT:http://localhost:9000}
+    access-key: ${MINIO_ACCESS_KEY:minioadmin}
+    secret-key: ${MINIO_SECRET_KEY:minioadmin}
+    bucket: ${UPLOAD_OBJECT_STORAGE_BUCKET:resume-uploads}
+    region: ${MINIO_REGION:us-east-1}
+    public-base-url: ${UPLOAD_PUBLIC_BASE_URL:/uploads}
